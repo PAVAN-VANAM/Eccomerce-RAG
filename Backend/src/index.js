@@ -18,17 +18,19 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:8080', // 👈 set to your frontend's origin
-  credentials: true // 👈 allow credentials (cookies, auth headers, etc.)
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.FRONTEND_URL 
+    : 'http://localhost:8080',
+  credentials: true
 }));
 
 app.use(session({
-  secret: 'mySecretKey',
+  secret: process.env.SESSION_SECRET || 'mySecretKey',
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: false,
+    secure: process.env.NODE_ENV === 'production',
     maxAge: 24 * 60 * 60 * 1000 // 1 day
   }
 }));
