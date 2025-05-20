@@ -8,7 +8,7 @@ export const register = async (req, res) => {
       const { name, email, password } = req.body;
   
       // Check if user exists
-      const existingUser = await User.findOne({ email });
+      const existingUser = await User.find({ email });
       if (existingUser) {
         return res.status(400).json({ message: 'User already exists' });
       }
@@ -48,7 +48,7 @@ export const login =  async (req, res) => {
       const { email, password } = req.body;
   
       // Find user
-      const user = await User.findOne({ email });
+      const user = await User.find({ email });
       if (!user) {
         return res.status(401).json({ message: 'Invalid credentials' });
       }

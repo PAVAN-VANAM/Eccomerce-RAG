@@ -6,7 +6,7 @@ import { Eye, EyeOff, ArrowRight, Mail, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 
-const API_URL = "http://localhost:3000"; // Replace with your actual API URL
+const API_URL = "https://eccomerce-rag.vercel.app"; // Replace with your actual API URL
 
 
 export const SignUp = () => {

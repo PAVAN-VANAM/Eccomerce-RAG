@@ -9,7 +9,7 @@ import axios from "axios";
 import { useAuth } from "../AuthContext";
 
 
-const API_URL = "http://localhost:3000"; // Replace with your actual API URL
+const API_URL = "https://eccomerce-rag.vercel.app"; // Replace with your actual API URL
 
 
 export const SignIn = () => {

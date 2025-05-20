@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const fetchSession = async () => {
-        const res = await fetch('http://localhost:3000/api/auth/session', {
+        const res = await fetch('https://eccomerce-rag.vercel.app/api/auth/session', {
             credentials: 'include',
         });
         const data = await res.json();

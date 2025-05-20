@@ -29,7 +29,7 @@ export const ChatInput: React.FC = () => {
 
     try {
       // Make API call to backend
-      const response = await fetch('http://localhost:3000/api/chat', {
+      const response = await fetch('https://eccomerce-rag.vercel.app/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export const ChatInput: React.FC = () => {
         // Handle both response formats (item with payload and direct item)
         const item = product.item;
         const productData = item.payload || item;
-        
+
         return {
           id: productData.id || item._id,
           name: productData.name || item.name,
