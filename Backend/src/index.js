@@ -52,6 +52,9 @@ async function init() {
     app.use("/api/orders", orderRoutes);
     app.use("/api/chat", chatRoutes);
 
+    app.get("/",(req,res)=>{
+      res.send("Helloworld");
+    })
     app.listen(process.env.PORT, () => {
       console.log(`🚀 Server running on port ${process.env.PORT}`);
     });
