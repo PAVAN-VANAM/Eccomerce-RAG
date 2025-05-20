@@ -8,12 +8,16 @@ export const register = async (req, res) => {
       const { name, email, password } = req.body;
   
       // Check if user exists
-      const existingUser = await User.find({ email });
-      if (existingUser) {
+      const existingUser = await User.find({email});
+      console.log(existingUser[0]);
+      
+      if (existingUser[0]) {
         return res.status(400).json({ message: 'User already exists' });
       }
+      
   
       // Hash password
+      
       const hashedPassword = await bcrypt.hash(password, 10);
   
       // Create user
@@ -45,14 +49,17 @@ export const register = async (req, res) => {
 
 export const login =  async (req, res) => {
     try {
+      
       const { email, password } = req.body;
-  
+
+      
       // Find user
-      const user = await User.find({ email });
+      const user = await User.findOne({ email });
+      
       if (!user) {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
-  
+      
       // Check password
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
@@ -62,7 +69,7 @@ export const login =  async (req, res) => {
       // Generate token and set cookie
       const token = generateToken(user._id);
       setSessionCookie(res, token);
-  
+      
       res.json({
         message: 'Login successful',
         user: {

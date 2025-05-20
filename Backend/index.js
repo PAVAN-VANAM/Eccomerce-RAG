@@ -6,6 +6,7 @@ import connectMongo from "./config/db.js";
 import { ensureProductCollection } from "./qdrant/productsCollection.js";
 import { syncProductsToQdrant } from "./qdrant/productSync.js";
 
+
 import productRoutes from "./routes/product.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import transactionRoutes from "./routes/transaction.routes.js";
