@@ -10,7 +10,6 @@ import productRoutes from "./routes/product.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import transactionRoutes from "./routes/transaction.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
-import session from 'express-session';
 
 import authRoutes from "./routes/auth.routes.js";
 
@@ -23,12 +22,19 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-async function init() {
+export async function init() {
   try {
     await connectMongo(); // ⏳ Wait until connected
 
     await ensureProductCollection(); // ✅ Safe to call after DB connect
     await syncProductsToQdrant(); // ✅ Now your DB is connected
+  } catch (err) {
+    console.error("❌ Failed to start server:", err);
+    process.exit(1);
+  }
+}
+
+init();
 
     // Public routes
     app.use("/api/auth", authRoutes);
@@ -44,11 +50,4 @@ async function init() {
     })
     app.listen(process.env.PORT, () => {
       console.log(`🚀 Server running on port ${process.env.PORT}`);
-    });
-  } catch (err) {
-    console.error("❌ Failed to start server:", err);
-    process.exit(1);
-  }
-}
-
-init();
+    });``
