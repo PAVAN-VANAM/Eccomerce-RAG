@@ -75,8 +75,8 @@ export async function handleChatQuery(req, res) {
     console.log("Qdrant Filter Payload:", JSON.stringify(qdrantFilter, null, 2));
 
     const vectorSearchRes = await client.search("ecommerce-products", {
-      vector,
-      limit: 3,
+      vector:vector,
+      limit :5,
       with_payload: true,
     });
     console.log(vectorSearchRes);
