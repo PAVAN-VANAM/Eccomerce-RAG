@@ -10,6 +10,7 @@ import productRoutes from "./routes/product.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import transactionRoutes from "./routes/transaction.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
+import session from 'express-session';
 
 import authRoutes from "./routes/auth.routes.js";
 
@@ -18,6 +19,16 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'mySecretKey',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 24 * 60 * 60 * 1000 // 1 day
+  }
+}));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -28,13 +39,6 @@ async function init() {
 
     await ensureProductCollection(); // ✅ Safe to call after DB connect
     await syncProductsToQdrant(); // ✅ Now your DB is connected
-  } catch (err) {
-    console.error("❌ Failed to start server:", err);
-    process.exit(1);
-  }
-}
-
-init();
 
     // Public routes
     app.use("/api/auth", authRoutes);
@@ -50,8 +54,14 @@ init();
     })
     app.listen(process.env.PORT, () => {
       console.log(`🚀 Server running on port ${process.env.PORT}`);
-    });``
+    });
+  } catch (err) {
+    console.error("❌ Failed to start server:", err);
+    process.exit(1);
+  }
+}
+
+init();
 
 
-
-    export default app;
+export default app;
