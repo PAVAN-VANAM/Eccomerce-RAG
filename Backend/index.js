@@ -40,6 +40,16 @@ async function init() {
     await ensureProductCollection(); // ✅ Safe to call after DB connect
     await syncProductsToQdrant(); // ✅ Now your DB is connected
 
+    console.log("preprocess completed of Qdrant , MongoDB , Product Sync");
+    
+  } catch (err) {
+    console.error("❌ Failed to start server:", err);
+    process.exit(1);
+  }
+}
+
+init();
+
     // Public routes
     app.use("/api/auth", authRoutes);
 
@@ -55,13 +65,6 @@ async function init() {
     app.listen(process.env.PORT, () => {
       console.log(`🚀 Server running on port ${process.env.PORT}`);
     });
-  } catch (err) {
-    console.error("❌ Failed to start server:", err);
-    process.exit(1);
-  }
-}
-
-init();
 
 
 export default app;
