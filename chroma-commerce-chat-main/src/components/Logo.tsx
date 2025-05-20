@@ -17,9 +17,11 @@ export const Logo: React.FC<LogoProps> = ({
   };
 
   return (
-    <div className={cn("font-bold", sizeClasses[size], className)}>
-      <span className="text-gradient">Shop</span>
-      <span>RAG</span>
-    </div>
+    <a href="https://ecommerce-frontend-topaz-ten.vercel.app/">
+      <div className={cn("font-bold", sizeClasses[size], className)}>
+        <span className="text-gradient">Pavan</span>
+        <span>Shop - AI</span>
+      </div>
+    </a>
   );
 };

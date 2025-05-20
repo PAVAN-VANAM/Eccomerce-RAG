@@ -26,7 +26,7 @@ type PrivateRouteProps = {
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const { user } = useAuth();
-  return user ? children : <Navigate to="/s" />;
+  return user ? children : <Navigate to="/" />;
 };
 
 
@@ -56,14 +56,11 @@ const App = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/product/:productId" element={<ProductDetail />} />
                 <Route path="/chat" element={
-                  <PrivateRoute>
-                    <Chat />
-                  </PrivateRoute>
+
+                  <Chat />
                 } />
                 <Route path="/dashboard" element={
-                  <PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>
+                  <Dashboard />
                 } />
                 <Route path="/index" element={<Navigate to="/" replace />} />
                 <Route path="*" element={<NotFound />} />
