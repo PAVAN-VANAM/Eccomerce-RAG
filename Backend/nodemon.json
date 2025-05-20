@@ -6,5 +6,5 @@
     "ignore": [
         "node_modules"
     ],
-    "exec": "node src/index.js"
+    "exec": "node index.js"
 }

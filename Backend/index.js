@@ -17,12 +17,7 @@ import authRoutes from "./routes/auth.routes.js";
 dotenv.config();
 
 const app = express();
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? process.env.FRONTEND_URL 
-    : 'http://localhost:8080',
-  credentials: true
-}));
+app.use(cors());
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'mySecretKey',
